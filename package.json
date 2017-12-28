@@ -1,0 +1,19 @@
+{
+  "name": "im621_chatbot",
+  "version": "1.0.0",
+  "description": "A chatbot for my lecture IM621 Semantic Text Analysis.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sa-rah/IM621_Chatbot.git"
+  },
+  "author": "Sarah Sauseng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sa-rah/IM621_Chatbot/issues"
+  },
+  "homepage": "https://github.com/sa-rah/IM621_Chatbot#readme"
+}
