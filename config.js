@@ -1,5 +1,57 @@
-module.exports = {
-    telegraf: '521290062:AAHzzHBP-T5jhPW62fgYxr7ViJyMFpwDfUo',
-    apiai: 'c715ce95287841e088cb160f8cb507ab',
-    unsplash: 'bc971ef99984d2d725007054f7dfef2da022b31c192fd1d27a4440c5330b3662'
-}
+'use strict';
+
+module.exports = class TelegramBotConfig {
+
+    get apiaiAccessToken() {
+        return this._apiaiAccessToken;
+    }
+
+    set apiaiAccessToken(value) {
+        this._apiaiAccessToken = value;
+    }
+
+    get apiaiLang() {
+        return this._apiaiLang;
+    }
+
+    set apiaiLang(value) {
+        this._apiaiLang = value;
+    }
+
+    get telegramToken() {
+        return this._telegramToken;
+    }
+
+    set telegramToken(value) {
+        this._telegramToken = value;
+    }
+
+    get devConfig() {
+        return this._devConfig;
+    }
+
+    set devConfig(value) {
+        this._devConfig = value;
+    }
+
+    constructor(apiaiAccessToken, apiaiLang, telegramToken) {
+        this._apiaiAccessToken = apiaiAccessToken;
+        this._apiaiLang = apiaiLang;
+        this._telegramToken = telegramToken;
+    }
+
+    toPlainDoc() {
+        return {
+            apiaiAccessToken: this._apiaiAccessToken,
+            apiaiLang: this._apiaiLang,
+            telegramToken: this._telegramToken
+        }
+    }
+
+    static fromPlainDoc(doc){
+        return new TelegramBotConfig(
+            doc.apiaiAccessToken,
+            doc.apiaiLang,
+            doc.telegramToken);
+    }
+};
