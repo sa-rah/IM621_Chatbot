@@ -11,20 +11,9 @@ const REST_PORT = (process.env.PORT || 5000);
 const DEV_CONFIG = process.env.DEVELOPMENT_CONFIG == 'true';
 
 const APP_NAME = process.env.APP_NAME;
-const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN;
-const APIAI_LANG = process.env.APIAI_LANG;
-const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
-
-var baseUrl = "";
-if (APP_NAME) {
-    baseUrl = `https://${APP_NAME}.herokuapp.com`;
-} else {
-    console.error('Set up the url of your service here and remove exit code!');
-    process.exit(1);
-}
-
-// console timestamps
-require('console-stamp')(console, 'yyyy.mm.dd HH:MM:ss.l');
+const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || "c715ce95287841e088cb160f8cb507ab";
+const APIAI_LANG = process.env.APIAI_LANG || "en";
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || '521290062:AAHzzHBP-T5jhPW62fgYxr7ViJyMFpwDfUo';
 
 const botConfig = new TelegramBotConfig(
     APIAI_ACCESS_TOKEN,
@@ -33,7 +22,7 @@ const botConfig = new TelegramBotConfig(
 
 botConfig.devConfig = DEV_CONFIG;
 
-const bot = new TelegramBot(botConfig, baseUrl);
+const bot = new TelegramBot(botConfig, "https://im621-pixx-bot.herokuapp.com");
 bot.start(() => {
         console.log("Bot started");
     },
