@@ -1,8 +1,11 @@
+'use strict';
+
+const apiai = require('apiai');
 const Telegraf = require('telegraf');
 const express = require('express');
 const expressApp = express();
 
-const API_TOKEN = process.env.API_TOKEN || '513828862:AAF8dcB1-Fzulu6Ax3GAuvHp1So0XwV2dAg';
+const API_TOKEN = process.env.API_TOKEN || '521290062:AAHzzHBP-T5jhPW62fgYxr7ViJyMFpwDfUo';
 const PORT = process.env.PORT || 3000;
 const URL = process.env.URL || 'https://im621-pixx-bot.herokuapp.com';
 
