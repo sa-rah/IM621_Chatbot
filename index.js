@@ -49,6 +49,7 @@ app.post('/webhook', (req, res) => {
     }
 });
 
-app.listen(REST_PORT, function () {
+app.listen(REST_PORT, (req, res) => {
+    res.send("This is the server part of the im621_pixxbot chatbot app for telegram.");
     console.log('Rest service ready on port ' + REST_PORT);
 });
