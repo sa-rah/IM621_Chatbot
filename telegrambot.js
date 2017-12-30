@@ -25,6 +25,14 @@ module.exports = class TelegramBot {
         this._unsplashService = value;
     }
 
+    get authentificationUrl() {
+        return this._authenticationUrl;
+    }
+
+    set authentificationUrl(value) {
+        this._authenticationUrl = value;
+    }
+
     get botConfig() {
         return this._botConfig;
     }
@@ -52,8 +60,26 @@ module.exports = class TelegramBot {
         this._unsplashService = new unsplash({
             applicationId: botConfig.unsplashAppId,
             secret: botConfig.unsplashSecret,
-            callbackUrl: botConfig.unsplashCallbackUrl
+            callbackUrl: botConfig.unsplashCallbackUrl,
+            bearerToken: "RHuiQgb3LUs82O2dMhoMYf1gpQKaecNQt4cQ/YC/PUD43o+KIs+XHynbEcaw98SmAPTBzC2YQIixLPlorXF6hg=="
         });
+
+        this._authenticationUrl = this._unsplashService.auth.getAuthenticationUrl([
+            "public",
+            "read_user",
+            "read_photos",
+            "read_collections"
+        ]);
+/*
+        console.log(this._authenticationUrl);
+        this._code = location.assign(this._authenticationUrl);
+
+        this._unsplashService.auth.userAuthentication(this._code.code)
+            .then(toJson)
+            .then(json => {
+                unsplash.auth.setBearerToken(json.access_token);
+        });*/
+
         this._sessionIds = new Map();
 
         this._webhookUrl = baseUrl + '/webhook';
