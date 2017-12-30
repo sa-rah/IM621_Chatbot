@@ -4,6 +4,7 @@ const apiai = require('apiai');
 const uuid = require('node-uuid');
 const request = require('request');
 const unsplash = require('unsplash-js').default;
+const toJson = require('unsplash-js').default.toJson;
 const fetch = require('isomorphic-fetch');
 
 module.exports = class TelegramBot {
