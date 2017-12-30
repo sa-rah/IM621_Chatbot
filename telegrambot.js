@@ -160,6 +160,18 @@ module.exports = class TelegramBot {
         let responseParameters = response.result.parameters;
         console.log(responseParameters);
 
+        if(TelegramBot.isDefined(responseParameters.photo)){
+
+            this._unsplashService.photos.getRandomPhoto()
+                .then(toJson)
+                .then(json => {
+                    this.reply({
+                        chat_id: chatId,
+                        photo: json
+                    });
+                });
+        }
+
         console.log('Response');
        /* this.reply({
             chat_id: chatId,
