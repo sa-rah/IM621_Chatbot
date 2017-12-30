@@ -123,6 +123,7 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
                     if (TelegramBot.isDefined(response.result)) {
+                        let responseText = response.result.fulfillment.speech;
                         if (TelegramBot.isDefined(responseText)) {
                             this.processResponse(response, chatId);
                             TelegramBot.createResponse(res, 200, 'Reply sent');
