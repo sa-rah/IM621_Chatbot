@@ -128,7 +128,7 @@ module.exports = class TelegramBot {
                     if (TelegramBot.isDefined(response.result)) {
                        this.reply({
                            chat_id: chatId,
-                           text: response.result.fulfillment.speech
+                           photo: response.result.fulfillment.speech
                        });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
@@ -175,20 +175,6 @@ module.exports = class TelegramBot {
             }
 
         }
-        //let responseText = response.result.fulfillment.speech;
-        /*if (TelegramBot.isDefined(responseText)) {
-            this.processResponse(response, chatId);
-            TelegramBot.createResponse(res, 200, 'Reply sent');
-        } else {
-            console.log('Received empty speech');
-            TelegramBot.createResponse(res, 200, 'Received empty speech');
-        }*/
-
-        console.log('Response');
-       /* this.reply({
-            chat_id: chatId,
-            text: responseText
-        });*/
 
     }
 
