@@ -128,7 +128,7 @@ module.exports = class TelegramBot {
                     if (TelegramBot.isDefined(response.result)) {
                        this.reply({
                            chat_id: chatId,
-                           text: response.speech
+                           text: response.result.fulfillment.speech
                        });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
