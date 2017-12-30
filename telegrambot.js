@@ -169,7 +169,7 @@ module.exports = class TelegramBot {
                     .then(toJson)
                     .then(json => {
                         console.log(json);
-                        res.send({ "speech": json });
+                        res.send({ "speech": json.url });
                     });
             }
 
