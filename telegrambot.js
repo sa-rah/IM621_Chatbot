@@ -126,9 +126,9 @@ module.exports = class TelegramBot {
                 apiaiRequest.on('response', (response) => {
                     console.log(response);
                     if (TelegramBot.isDefined(response.result)) {
-                       this.reply({
+                       this.replyPhoto({
                            chat_id: chatId,
-                           photo: response.result.fulfillment.speech
+                           msg: response.result.fulfillment.speech
                        });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
@@ -182,6 +182,25 @@ module.exports = class TelegramBot {
         // https://core.telegram.org/bots/api#sendmessage
         request.post(this._telegramApiUrl + '/sendMessage', {
             json: msg
+        }, function (error, response, body) {
+            if (error) {
+                console.error('Error while /sendMessage', error);
+                return;
+            }
+
+            if (response.statusCode != 200) {
+                console.error('Error status code while /sendMessage', body);
+                return;
+            }
+
+            console.log('Method /sendMessage succeeded');
+        });
+    }
+
+    replyPhoto(msg) {
+        // https://core.telegram.org/bots/api#sendmessage
+        request.post(this._telegramApiUrl + '/sendPhoto', {
+            json: { "chat_id": msg.chat_id, "photo": msg.msg }
         }, function (error, response, body) {
             if (error) {
                 console.error('Error while /sendMessage', error);
