@@ -70,15 +70,15 @@ module.exports = class TelegramBot {
             "read_photos",
             "read_collections"
         ]);
-/*
+
         console.log(this._authenticationUrl);
-        this._code = location.assign(this._authenticationUrl);
+        this._code = window.location.assign(this._authenticationUrl);
 
         this._unsplashService.auth.userAuthentication(this._code.code)
             .then(toJson)
             .then(json => {
                 unsplash.auth.setBearerToken(json.access_token);
-        });*/
+        });
 
         this._sessionIds = new Map();
 
