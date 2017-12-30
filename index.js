@@ -1,6 +1,7 @@
 'use strict';
 
 const apiai = require('apiai');
+const unsplash = require('unsplash-js');
 const express = require('express');
 const bodyParser = require('body-parser');
 

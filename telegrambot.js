@@ -3,7 +3,7 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const request = require('request');
-const unsplash = require('unsplash-js');
+const unsplash = require('unsplash-js').default;
 
 module.exports = class TelegramBot {
 
