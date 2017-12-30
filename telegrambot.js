@@ -158,13 +158,6 @@ module.exports = class TelegramBot {
         let updateObject = req.body;
 
         if (updateObject && updateObject.result.resolvedQuery) {
-            let msg = updateObject.result.resolvedQuery;
-
-            var chatId;
-
-            if (updateObject.originalRequest.user.user_id) {
-                chatId = updateObject.originalRequest.user.user_id;
-            }
 
             let responseParameters = updateObject.result.parameters;
             console.log(responseParameters);
