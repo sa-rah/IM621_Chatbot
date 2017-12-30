@@ -41,16 +41,16 @@ bot.start(() => {
 const app = express();
 app.use(bodyParser.json());
 
+app.post('/hook', (req, res) => {
+    bot.processResponse(req, res);
+});
+
 app.post('/webhook', (req, res) => {
     try {
         bot.processMessage(req, res);
     } catch (err) {
         return res.status(400).send('Error while processing ' + err.message);
     }
-});
-
-app.post('hook', (req, res) => {
-    bot.processResponse(req, res);
 });
 
 app.get('/', (req, res) => {
