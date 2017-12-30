@@ -123,14 +123,7 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
                     if (TelegramBot.isDefined(response.result)) {
-                        let responseText = response.result.fulfillment.speech;
-                        if (TelegramBot.isDefined(responseText)) {
-                            this.processResponse(response, chatId);
-                            TelegramBot.createResponse(res, 200, 'Reply sent');
-                        } else {
-                            console.log('Received empty speech');
-                            TelegramBot.createResponse(res, 200, 'Received empty speech');
-                        }
+                        this.processResponse(response, chatId);
                     } else {
                         console.log('Received empty result');
                         TelegramBot.createResponse(res, 200, 'Received empty result');
@@ -155,6 +148,18 @@ module.exports = class TelegramBot {
 
     processResponse(response, chatId){
         let responseText = response.result.fulfillment.speech;
+        /*if (TelegramBot.isDefined(responseText)) {
+            this.processResponse(response, chatId);
+            TelegramBot.createResponse(res, 200, 'Reply sent');
+        } else {
+            console.log('Received empty speech');
+            TelegramBot.createResponse(res, 200, 'Received empty speech');
+        }*/
+
+        let responseParameters = response.result.parameters;
+
+        console.log(responseParameters);
+
         console.log('Response as text message');
         this.reply({
             chat_id: chatId,
