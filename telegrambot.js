@@ -174,6 +174,7 @@ module.exports = class TelegramBot {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
                         console.log(response);
+                        res.send(response);
                     })
                     .catch((err) => {
 
