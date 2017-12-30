@@ -1,7 +1,5 @@
 'use strict';
 
-const apiai = require('apiai');
-const unsplash = require('unsplash-js');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -15,17 +13,13 @@ const APP_NAME = process.env.APP_NAME;
 const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || "c715ce95287841e088cb160f8cb507ab";
 const APIAI_LANG = process.env.APIAI_LANG || "en";
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || '521290062:AAHzzHBP-T5jhPW62fgYxr7ViJyMFpwDfUo';
-const UNSPLASH_APP_ID = process.env.UNSPLASH_APP_ID || 'bc971ef99984d2d725007054f7dfef2da022b31c192fd1d27a4440c5330b3662';
-const UNSPLASH_SECRET = process.env.UNSPLASH_SECRET || 'ae05302fda6cde434f1705dabf333e5b4d5210dddf9a4aef7c99a9e5b1251016';
-const UNSPLASH_CALLBACK_URL = process.env.UNSPLASH_CALLBACK_URL || 'urn:ietf:wg:oauth:2.0:oob';
+const GIPHY_ACCESS_TOKEN = process.env.GIPHY_ACCESS_TOKEN || 'KY0Cog06sjZLYIVwFOO7Bm881p77d41a';
 
 const botConfig = new TelegramBotConfig(
     APIAI_ACCESS_TOKEN,
     APIAI_LANG,
     TELEGRAM_TOKEN,
-    UNSPLASH_APP_ID,
-    UNSPLASH_SECRET,
-    UNSPLASH_CALLBACK_URL);
+    GIPHY_ACCESS_TOKEN);
 
 botConfig.devConfig = DEV_CONFIG;
 

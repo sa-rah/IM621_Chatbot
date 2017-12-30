@@ -3,7 +3,7 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const request = require('request');
-const unsplash = require('unsplash-js').default;
+const giphy = require('giphy-js-sdk-core');
 const toJson = require('unsplash-js').default.toJson;
 const fetch = require('isomorphic-fetch');
 
@@ -17,12 +17,12 @@ module.exports = class TelegramBot {
         this._apiaiService = value;
     }
 
-    get unsplashService() {
-        return this._unsplashService;
+    get giphyService() {
+        return this._giphyService;
     }
 
-    set unsplashService(value) {
-        this._unsplashService = value;
+    set giphyService(value) {
+        this._giphyService = value;
     }
 
     get authentificationUrl() {
@@ -57,28 +57,7 @@ module.exports = class TelegramBot {
         };
 
         this._apiaiService = apiai(botConfig.apiaiAccessToken, apiaiOptions);
-        this._unsplashService = new unsplash({
-            applicationId: botConfig.unsplashAppId,
-            secret: botConfig.unsplashSecret,
-            callbackUrl: botConfig.unsplashCallbackUrl,
-            bearerToken: "RHuiQgb3LUs82O2dMhoMYf1gpQKaecNQt4cQ/YC/PUD43o+KIs+XHynbEcaw98SmAPTBzC2YQIixLPlorXF6hg=="
-        });
-
-        this._authenticationUrl = this._unsplashService.auth.getAuthenticationUrl([
-            "public",
-            "read_user",
-            "read_photos",
-            "read_collections"
-        ]);
-
-        console.log(this._authenticationUrl);
-        this._code = window.location.assign(this._authenticationUrl);
-
-        this._unsplashService.auth.userAuthentication(this._code.code)
-            .then(toJson)
-            .then(json => {
-                unsplash.auth.setBearerToken(json.access_token);
-        });
+        this._giphyService = new giphy(botConfig.giphyAccessToken);
 
         this._sessionIds = new Map();
 
@@ -192,12 +171,13 @@ module.exports = class TelegramBot {
             console.log(responseParameters);
 
             if(TelegramBot.isDefined(responseParameters.photo)){
-                this._unsplashService.photos.getRandomPhoto()
-                    .then(toJson)
-                    .then(json => {
-                        console.log(json);
-                        res.send({ "speech": json.url });
-                    });
+                this._giphyService.random('gifs', {})
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((err) => {
+
+                    })
             }
 
         }

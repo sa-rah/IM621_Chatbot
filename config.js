@@ -26,28 +26,12 @@ module.exports = class TelegramBotConfig {
         this._telegramToken = value;
     }
 
-    get unsplashAppId() {
-        return this._unsplashAppId;
+    get giphyAccessToken() {
+        return this._giphyAccessToken;
     }
 
-    set unsplashAppId(value) {
-        this._unsplashAppId = value;
-    }
-
-    get unsplashSecret() {
-        return this._unsplashSecret;
-    }
-
-    set unsplashSecret(value) {
-        this._unsplashSecret = value;
-    }
-
-    get unsplashCallbackUrl() {
-        return this._unsplashCallbackUrl;
-    }
-
-    set unsplashCallbackUrl(value) {
-        this._unsplashCallbackUrl = value;
+    set giphyAccessToken(value) {
+        this._giphyAccessToken = value;
     }
 
     get devConfig() {
@@ -58,13 +42,11 @@ module.exports = class TelegramBotConfig {
         this._devConfig = value;
     }
 
-    constructor(apiaiAccessToken, apiaiLang, telegramToken, unsplashAppId, unsplashSecret, unsplashCallbackUrl) {
+    constructor(apiaiAccessToken, apiaiLang, telegramToken, giphyAccessToken) {
         this._apiaiAccessToken = apiaiAccessToken;
         this._apiaiLang = apiaiLang;
         this._telegramToken = telegramToken;
-        this._unsplashAppId = unsplashAppId;
-        this._unsplashSecret = unsplashSecret;
-        this._unsplashCallbackUrl = unsplashCallbackUrl;
+        this._giphyAccessToken = giphyAccessToken;
     }
 
     toPlainDoc() {
@@ -72,9 +54,7 @@ module.exports = class TelegramBotConfig {
             apiaiAccessToken: this._apiaiAccessToken,
             apiaiLang: this._apiaiLang,
             telegramToken: this._telegramToken,
-            unsplashAppId: this._unsplashAppId,
-            unsplashSecret: this._unsplashSecret,
-            unsplashCallbackUrl: this._unsplashCallbackUrl
+            giphyAccessToken: this._giphyAccessToken
         }
     }
 
@@ -83,8 +63,6 @@ module.exports = class TelegramBotConfig {
             doc.apiaiAccessToken,
             doc.apiaiLang,
             doc.telegramToken,
-            doc.unsplashAppId,
-            doc.unsplashSecret,
-            doc.unsplashCallbackUrl);
+            doc.giphyAccessToken);
     }
 };
