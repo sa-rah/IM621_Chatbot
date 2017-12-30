@@ -41,17 +41,12 @@ bot.start(() => {
 const app = express();
 app.use(bodyParser.json());
 
-app.use('/webhook', (req, res, next) => {
+app.post('/webhook', (req, res) => {
     try {
         bot.processMessage(req, res);
     } catch (err) {
         return res.status(400).send('Error while processing ' + err.message);
     }
-    next();
-});
-
-app.post('/webhook', (req, res) => {
-   bot.processResponse(req, res);
 });
 
 app.get('/', (req, res) => {

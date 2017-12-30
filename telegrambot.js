@@ -158,11 +158,9 @@ module.exports = class TelegramBot {
         }*/
 
         let responseParameters = response.result.parameters;
-
-
         console.log(responseParameters);
 
-        console.log('Response as text message');
+        console.log('Response');
        /* this.reply({
             chat_id: chatId,
             text: responseText
