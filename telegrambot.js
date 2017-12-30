@@ -124,6 +124,7 @@ module.exports = class TelegramBot {
                     });
 
                 apiaiRequest.on('response', (response) => {
+                    console.log(response);
                     if (TelegramBot.isDefined(response.result)) {
                        this.reply({
                            chat_id: chatId,
