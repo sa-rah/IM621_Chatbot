@@ -26,6 +26,30 @@ module.exports = class TelegramBotConfig {
         this._telegramToken = value;
     }
 
+    get unsplashAppId() {
+        return this._unsplashAppId;
+    }
+
+    set unsplashAppId(value) {
+        this._unsplashAppId = value;
+    }
+
+    get unsplashSecret() {
+        return this._unsplashSecret;
+    }
+
+    set unsplashSecret(value) {
+        this._unsplashSecret = value;
+    }
+
+    get unsplashCallbackUrl() {
+        return this._unsplashCallbackUrl;
+    }
+
+    set unsplashCallbackUrl(value) {
+        this._unsplashCallbackUrl = value;
+    }
+
     get devConfig() {
         return this._devConfig;
     }
@@ -34,17 +58,23 @@ module.exports = class TelegramBotConfig {
         this._devConfig = value;
     }
 
-    constructor(apiaiAccessToken, apiaiLang, telegramToken) {
+    constructor(apiaiAccessToken, apiaiLang, telegramToken, unsplashAppId, unsplashSecret, unsplashCallbackUrl) {
         this._apiaiAccessToken = apiaiAccessToken;
         this._apiaiLang = apiaiLang;
         this._telegramToken = telegramToken;
+        this._unsplashAppId = unsplashAppId;
+        this._unsplashSecret = unsplashSecret;
+        this._unsplashCallbackUrl = unsplashCallbackUrl;
     }
 
     toPlainDoc() {
         return {
             apiaiAccessToken: this._apiaiAccessToken,
             apiaiLang: this._apiaiLang,
-            telegramToken: this._telegramToken
+            telegramToken: this._telegramToken,
+            unsplashAppId: this._unsplashAppId,
+            unsplashSecret: this._unsplashSecret,
+            unsplashCallbackUrl: this._unsplashCallbackUrl
         }
     }
 
@@ -52,6 +82,9 @@ module.exports = class TelegramBotConfig {
         return new TelegramBotConfig(
             doc.apiaiAccessToken,
             doc.apiaiLang,
-            doc.telegramToken);
+            doc.telegramToken,
+            doc.unsplashAppId,
+            doc.unsplashSecret,
+            doc.unsplashCallbackUrl);
     }
 };

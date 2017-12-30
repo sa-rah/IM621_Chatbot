@@ -24,7 +24,9 @@
     },
     "UNSPLASH_ACESS_TOKEN": {
       "description": "Unsplash API access token.",
-      "value": "bc971ef99984d2d725007054f7dfef2da022b31c192fd1d27a4440c5330b3662"
+      "app_id": "bc971ef99984d2d725007054f7dfef2da022b31c192fd1d27a4440c5330b3662",
+      "secret": "ae05302fda6cde434f1705dabf333e5b4d5210dddf9a4aef7c99a9e5b1251016",
+      "callback_url": "urn:ietf:wg:oauth:2.0:oob"
     }
   },
   "engines": {

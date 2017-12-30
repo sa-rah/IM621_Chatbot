@@ -3,6 +3,7 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const request = require('request');
+const unsplash = require('unsplash-js');
 
 module.exports = class TelegramBot {
 
@@ -12,6 +13,14 @@ module.exports = class TelegramBot {
 
     set apiaiService(value) {
         this._apiaiService = value;
+    }
+
+    get unsplashService() {
+        return this._unsplashService;
+    }
+
+    set unsplashService(value) {
+        this._unsplashService = value;
     }
 
     get botConfig() {
@@ -38,6 +47,11 @@ module.exports = class TelegramBot {
         };
 
         this._apiaiService = apiai(botConfig.apiaiAccessToken, apiaiOptions);
+        this._unsplashService = new unsplash({
+            applicationId: botConfig.unsplashAppId,
+            secret: botConfig.unsplashSecret,
+            callbackUrl: botConfig.unsplashCallbackUrl
+        });
         this._sessionIds = new Map();
 
         this._webhookUrl = baseUrl + '/webhook';
@@ -162,6 +176,25 @@ module.exports = class TelegramBot {
 
             console.log('Method /sendMessage succeeded');
         });
+    }
+
+    replyImages(img) {
+        request.post(this._telegramApiUrl + '/sendImage', {
+            json: img,
+        }, function (error, response, body) {
+            if (error) {
+                console.error('Error while /sendImage', error);
+                return;
+            }
+
+            if (response.statusCode != 200) {
+                console.error('Error status code while /sendImage', body);
+                return;
+            }
+
+            console.log('Method /sendImage succeeded');
+        });
+
     }
 
     static createResponse(resp, code, message) {
