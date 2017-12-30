@@ -161,10 +161,10 @@ module.exports = class TelegramBot {
         console.log(responseParameters);
 
         console.log('Response as text message');
-        this.reply({
+       /* this.reply({
             chat_id: chatId,
             text: responseText
-        });
+        });*/
     }
 
     reply(msg) {
