@@ -49,6 +49,10 @@ app.post('/webhook', (req, res) => {
     }
 });
 
+app.post('hook', (req, res) => {
+    bot.processResponse(req, res);
+});
+
 app.get('/', (req, res) => {
     res.send("This is the server part of the im621_pixxbot chatbot app for telegram.");
 });

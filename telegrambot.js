@@ -123,7 +123,10 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
                     if (TelegramBot.isDefined(response.result)) {
-                       this.processResponse(response, chatId);
+                       this.reply({
+                           chat_id: chatId,
+                           text: response.speech
+                       });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
                         console.log('Received empty result');
@@ -147,8 +150,36 @@ module.exports = class TelegramBot {
         }
     }
 
-    processResponse(response, chatId){
-        let responseText = response.result.fulfillment.speech;
+    processResponse(req, res){
+        if (this._botConfig.devConfig) {
+            console.log("body", req.body);
+        }
+
+        let updateObject = req.body;
+
+        if (updateObject && updateObject.result.resolvedQuery) {
+            let msg = updateObject.result.resolvedQuery;
+
+            var chatId;
+
+            if (updateObject.originalRequest.user.user_id) {
+                chatId = updateObject.originalRequest.user.user_id;
+            }
+
+            let responseParameters = updateObject.result.parameters;
+            console.log(responseParameters);
+
+            if(TelegramBot.isDefined(responseParameters.photo)){
+                this._unsplashService.photos.getRandomPhoto()
+                    .then(toJson)
+                    .then(json => {
+                        console.log(json);
+                        res.send({ "speech": json });
+                    });
+            }
+
+        }
+        //let responseText = response.result.fulfillment.speech;
         /*if (TelegramBot.isDefined(responseText)) {
             this.processResponse(response, chatId);
             TelegramBot.createResponse(res, 200, 'Reply sent');
@@ -156,21 +187,6 @@ module.exports = class TelegramBot {
             console.log('Received empty speech');
             TelegramBot.createResponse(res, 200, 'Received empty speech');
         }*/
-
-        let responseParameters = response.result.parameters;
-        console.log(responseParameters);
-
-        if(TelegramBot.isDefined(responseParameters.photo)){
-
-            this._unsplashService.photos.getRandomPhoto()
-                .then(toJson)
-                .then(json => {
-                    this.reply({
-                        chat_id: chatId,
-                        photo: json
-                    });
-                });
-        }
 
         console.log('Response');
        /* this.reply({
@@ -197,25 +213,6 @@ module.exports = class TelegramBot {
 
             console.log('Method /sendMessage succeeded');
         });
-    }
-
-    replyImages(img) {
-        request.post(this._telegramApiUrl + '/sendImage', {
-            json: img,
-        }, function (error, response, body) {
-            if (error) {
-                console.error('Error while /sendImage', error);
-                return;
-            }
-
-            if (response.statusCode != 200) {
-                console.error('Error status code while /sendImage', body);
-                return;
-            }
-
-            console.log('Method /sendImage succeeded');
-        });
-
     }
 
     static createResponse(resp, code, message) {
