@@ -168,11 +168,12 @@ module.exports = class TelegramBot {
     }
 
     checkResponseParameters(req, res, responseParameters) {
-        console.log("PARAMETERS: " + responseParameters);
+        console.log("PARAMETERMETHOD")
 
         if(TelegramBot.isDefined(responseParameters.gif)){
             if(TelegramBot.isDefined(responseParameters.keyword)){
-                this._giphyService.search('gifs', {"q": responseParameters.keyword})
+                console.log(responseParameters.keyword);
+                this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": 1})
                     .then((response) => {
                     console.log(response.data);
                     res.send({ "speech": response.data.url });
@@ -219,7 +220,7 @@ module.exports = class TelegramBot {
         } else if (TelegramBot.isDefined(responseParameters.user)) {
 
         } else {
-
+            res.send(200);
         }
     }
 
@@ -232,12 +233,10 @@ module.exports = class TelegramBot {
                 console.error('Error while /sendMessage', error);
                 return;
             }
-
             if (response.statusCode != 200) {
                 console.error('Error status code while /sendMessage', body);
                 return;
             }
-
             console.log('Method /sendMessage succeeded');
         });
     }
@@ -250,12 +249,10 @@ module.exports = class TelegramBot {
                 console.error('Error while /sendMessage', error);
                 return;
             }
-
             if (response.statusCode != 200) {
                 console.error('Error status code while /sendMessage', body);
                 return;
             }
-
             console.log('Method /sendMessage succeeded');
         });
     }
@@ -268,12 +265,10 @@ module.exports = class TelegramBot {
                 console.error('Error while /sendMessage', error);
                 return;
             }
-
             if (response.statusCode != 200) {
                 console.error('Error status code while /sendMessage', body);
                 return;
             }
-
             console.log('Method /sendMessage succeeded');
         });
     }
