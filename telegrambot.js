@@ -126,7 +126,7 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
                     console.log("HOOKRESPONSE:");
-                    console.log(response.result.fulfillment.speech);
+                    console.log(response.result);
                     if (TelegramBot.isDefined(response.result)) {
                         response.result.fulfillment.speech.forEach((speech) => {
                             this.replyText({
