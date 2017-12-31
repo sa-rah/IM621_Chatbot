@@ -131,7 +131,7 @@ module.exports = class TelegramBot {
                 apiaiRequest.on('response', (response) => {
                     console.log(response);
                     if (TelegramBot.isDefined(response.result)) {
-                       this.replyPhoto({
+                       this.replyGif({
                            chat_id: chatId,
                            msg: response.result.fulfillment.speech
                        });
@@ -204,9 +204,9 @@ module.exports = class TelegramBot {
         });
     }
 
-    replyPhoto(msg) {
+    replyGif(msg) {
         // https://core.telegram.org/bots/api#sendmessage
-        request.post(this._telegramApiUrl + '/sendPhoto', {
+        request.post(this._telegramApiUrl + '/sendDocument', {
             json: { "chat_id": msg.chat_id, "photo": msg.msg }
         }, function (error, response, body) {
             if (error) {
