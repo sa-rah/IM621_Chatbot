@@ -200,7 +200,7 @@ module.exports = class TelegramBot {
             if(TelegramBot.isDefined(responseParameters.keyword)){
                 this._giphyService.search('stickers', {"q": responseParameters.keyword})
                     .then((response) => {
-                        console.log(response.data);
+                        console.log("Keyword:" + response.data);
                         res.send(response.data);
                         /*response.data.forEach((gifObject) => {
 
@@ -212,7 +212,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('stickers', {})
                     .then((response) => {
-                        console.log(response);
+                        console.log("Random:" + response);
                         res.send({ "speech": response.data.url });
                     })
                     .catch((err) => {
