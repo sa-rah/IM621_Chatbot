@@ -128,10 +128,11 @@ module.exports = class TelegramBot {
                     console.log("HOOKRESPONSE:");
                     console.log(response.result);
                     if (TelegramBot.isDefined(response.result)) {
-                        response.result.fulfillment.speech.forEach((speech) => {
+                        let speech = response.result.fulfillment.speech.split(",");
+                        speech.forEach((text) => {
                             this.replyText({
                                 chat_id: chatId,
-                                msg: speech.msg
+                                msg: text
                             });
                         });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
@@ -177,8 +178,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
-                        console.log(gifs);
-                        res.send({ "speech": gifs[0] });
+                        res.send({ "speech": gifs.toString() });
                     })
                     .catch((err) => {
                         console.log(err);
@@ -190,7 +190,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
-                        res.send({ "speech": gifs });
+                        res.send({ "speech": gifs.toString() });
                     })
                     .catch((err) => {
                         console.log(err);
@@ -204,7 +204,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((stickerObject) => {
                             sticker.push(stickerObject.url);
                         });
-                        res.send({ "speech": sticker });
+                        res.send({ "speech": sticker.toString() });
                     })
                     .catch((err) => {
                         console.log(err);
@@ -216,7 +216,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((stickerObject) => {
                             sticker.push(stickerObject.url);
                         });
-                        res.send({ "speech": sticker });
+                        res.send({ "speech": sticker.toString() });
                     })
                     .catch((err) => {
                         console.log(err);
@@ -232,7 +232,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
-                        res.send({"speech": gifs});
+                        res.send({"speech": gifs.toString()});
                     })
                     .catch((err) => {
                         console.log(err);
