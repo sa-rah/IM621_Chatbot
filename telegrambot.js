@@ -178,7 +178,7 @@ module.exports = class TelegramBot {
                 this._giphyService.search('gifs', {"q": responseParameters.keyword})
                     .then((response) => {
                     console.log(response.data);
-                    res.send({ "speech": response.data });
+                    res.send({ "speech": response.data.url });
                         /*response.data.forEach((gifObject) => {
 
                         })*/
@@ -201,7 +201,7 @@ module.exports = class TelegramBot {
                 this._giphyService.search('stickers', {"q": responseParameters.keyword})
                     .then((response) => {
                         console.log("Keyword:" + response.data);
-                        res.send({ "speech": response.data });
+                        res.send({ "speech": response.data.url });
                         /*response.data.forEach((gifObject) => {
 
                         })*/
