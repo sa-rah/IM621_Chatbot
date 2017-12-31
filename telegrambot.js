@@ -127,7 +127,7 @@ module.exports = class TelegramBot {
                     });
 
                 apiaiRequest.on('response', (response) => {
-                    console.log(response);
+                    console.log("HOOKRESPONSE:" + response);
                     if (TelegramBot.isDefined(response.result)) {
                        this.replyGif({
                            chat_id: chatId,
@@ -178,7 +178,7 @@ module.exports = class TelegramBot {
                 this._giphyService.search('gifs', {"q": responseParameters.keyword})
                     .then((response) => {
                     console.log(response.data);
-                    res.send(response.data);
+                    res.send({ "speech": response.data });
                         /*response.data.forEach((gifObject) => {
 
                         })*/
@@ -201,7 +201,7 @@ module.exports = class TelegramBot {
                 this._giphyService.search('stickers', {"q": responseParameters.keyword})
                     .then((response) => {
                         console.log("Keyword:" + response.data);
-                        res.send(response.data);
+                        res.send({ "speech": response.data });
                         /*response.data.forEach((gifObject) => {
 
                         })*/
