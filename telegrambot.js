@@ -185,7 +185,7 @@ module.exports = class TelegramBot {
 
     }
 
-    reply(msg) {
+    replyText(msg) {
         // https://core.telegram.org/bots/api#sendmessage
         request.post(this._telegramApiUrl + '/sendMessage', {
             json: msg
@@ -205,8 +205,25 @@ module.exports = class TelegramBot {
     }
 
     replyGif(msg) {
-        // https://core.telegram.org/bots/api#sendmessage
         request.post(this._telegramApiUrl + '/sendDocument', {
+            json: { "chat_id": msg.chat_id, "document": msg.msg }
+        }, function (error, response, body) {
+            if (error) {
+                console.error('Error while /sendMessage', error);
+                return;
+            }
+
+            if (response.statusCode != 200) {
+                console.error('Error status code while /sendMessage', body);
+                return;
+            }
+
+            console.log('Method /sendMessage succeeded');
+        });
+    }
+
+    replyPhoto(msg) {
+        request.post(this._telegramApiUrl + '/sendPhoto', {
             json: { "chat_id": msg.chat_id, "photo": msg.msg }
         }, function (error, response, body) {
             if (error) {
