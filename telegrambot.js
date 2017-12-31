@@ -127,7 +127,6 @@ module.exports = class TelegramBot {
                 apiaiRequest.on('response', (response) => {
                     if (TelegramBot.isDefined(response.result)) {
                         let speech = response.result.fulfillment.speech.split(",");
-                        console.log(speech);
                         speech.forEach((text) => {
                             this.replyText({
                                 chat_id: chatId,
@@ -172,7 +171,6 @@ module.exports = class TelegramBot {
         let limit = 1;
         if(TelegramBot.isDefined(responseParameters.amount)){
             let amount = responseParameters.amount;
-            // more, one, 1,
             if(amount == "amount"){
                 limit = 5;
             } else if (amount == "several") {
@@ -200,6 +198,7 @@ module.exports = class TelegramBot {
                 this._giphyService.random('gifs', {"limit": limit})
                     .then((response) => {
                         var gifs = [];
+                        console.log(response.data);
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
