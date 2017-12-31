@@ -177,6 +177,7 @@ module.exports = class TelegramBot {
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
+                        console.log(gifs);
                         res.send({ "speech": gifs });
                     })
                     .catch((err) => {
