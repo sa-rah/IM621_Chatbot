@@ -116,8 +116,6 @@ module.exports = class TelegramBot {
 
             let messageText = msg.text;
 
-            console.log(chatId, messageText);
-
             if (chatId && messageText) {
                 if (!this._sessionIds.has(chatId)) {
                     this._sessionIds.set(chatId, uuid.v1());
@@ -137,23 +135,19 @@ module.exports = class TelegramBot {
                        });
                        TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
-                        console.log('Received empty result');
                         TelegramBot.createResponse(res, 200, 'Received empty result');
                     }
                 });
 
                 apiaiRequest.on('error', (error) => {
-                    console.error('Error while call to api.ai', error);
                     TelegramBot.createResponse(res, 200, 'Error while call to api.ai');
                 });
                 apiaiRequest.end();
             }
             else {
-                console.log('Empty message');
                 return TelegramBot.createResponse(res, 200, 'Empty message');
             }
         } else {
-            console.log('Empty message');
             return TelegramBot.createResponse(res, 200, 'Empty message');
         }
     }
@@ -166,27 +160,73 @@ module.exports = class TelegramBot {
         let updateObject = req.body;
 
         if (updateObject && updateObject.result.resolvedQuery) {
-
             let responseParameters = updateObject.result.parameters;
             console.log(responseParameters);
 
-            if(TelegramBot.isDefined(responseParameters.photo)){
+            this.checkResponseParameters(req, res, responseParameters);
+        } else {
+            res.send(400);
+        }
+
+    }
+
+    checkResponseParameters(req, res, responseParameters) {
+        console.log(responseParameters);
+
+        if(TelegramBot.isDefined(responseParameters.gif)){
+            if(TelegramBot.isDefined(responseParameters.keyword)){
+                this._giphyService.search('gifs', {"q": responseParameters.keyword})
+                    .then((response) => {
+                    console.log(response.data);
+                    res.send(response.data);
+                        /*response.data.forEach((gifObject) => {
+
+                        })*/
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
                         console.log(response);
                         res.send({ "speech": response.data.url });
                     })
                     .catch((err) => {
-
-                    })
+                        console.log(err);
+                    });
             }
+        } else if (TelegramBot.isDefined(responseParameters.sticker)) {
+            if(TelegramBot.isDefined(responseParameters.keyword)){
+                this._giphyService.search('stickers', {"q": responseParameters.keyword})
+                    .then((response) => {
+                        console.log(response.data);
+                        res.send(response.data);
+                        /*response.data.forEach((gifObject) => {
+
+                        })*/
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else {
+                this._giphyService.random('stickers', {})
+                    .then((response) => {
+                        console.log(response);
+                        res.send({ "speech": response.data.url });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        } else if (TelegramBot.isDefined(responseParameters.user)) {
+
+        } else {
 
         }
-
     }
 
     replyText(msg) {
-        // https://core.telegram.org/bots/api#sendmessage
         request.post(this._telegramApiUrl + '/sendMessage', {
             json: msg
         }, function (error, response, body) {
