@@ -129,7 +129,7 @@ module.exports = class TelegramBot {
                 apiaiRequest.on('response', (response) => {
                     console.log("HOOKRESPONSE:" + response);
                     if (TelegramBot.isDefined(response.result)) {
-                       this.replyGif({
+                       this.replyText({
                            chat_id: chatId,
                            msg: response.result.fulfillment.speech
                        });
