@@ -164,10 +164,7 @@ module.exports = class TelegramBot {
             console.log(responseParameters);
 
             this.checkResponseParameters(req, res, responseParameters);
-        } else {
-            res.send(400);
         }
-
     }
 
     checkResponseParameters(req, res, responseParameters) {
