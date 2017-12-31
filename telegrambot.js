@@ -171,7 +171,7 @@ module.exports = class TelegramBot {
     }
 
     checkResponseParameters(req, res, responseParameters) {
-        console.log(responseParameters);
+        console.log("PARAMETERS: " + responseParameters);
 
         if(TelegramBot.isDefined(responseParameters.gif)){
             if(TelegramBot.isDefined(responseParameters.keyword)){
