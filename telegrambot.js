@@ -176,10 +176,11 @@ module.exports = class TelegramBot {
                 this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": 1})
                     .then((response) => {
                         console.log(response.data);
-                        let gifs = [];
+                        var gifs = [];
                         response.data.forEach((gifObject) => {
                             gifs.push(gifObject.url);
                         });
+                        console.log(gifs);
                         res.send({ "speech": gifs });
                     })
                     .catch((err) => {
