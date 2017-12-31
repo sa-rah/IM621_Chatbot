@@ -226,7 +226,7 @@ module.exports = class TelegramBot {
     replyText(msg) {
         console.log(msg);
         request.post(this._telegramApiUrl + '/sendMessage', {
-            json: msg
+            json: { "chat_id": msg.chat_id, "text": msg.msg }
         }, function (error, response, body) {
             if (error) {
                 console.error('Error while /sendMessage', error);
