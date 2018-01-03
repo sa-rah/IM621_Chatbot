@@ -182,7 +182,6 @@ module.exports = class TelegramBot {
             } else {
                 limit = 1;
             }
-            console.log(limit);
         }
 
         if (TelegramBot.isDefined(responseParameters['number-integer'])) {
@@ -218,6 +217,7 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             }
+            console.log(limit);
         } else if (TelegramBot.isDefined(responseParameters.sticker)) {
             console.log(responseParameters.sticker);
             let stickerParam = responseParameters.sticker;
@@ -246,6 +246,7 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             }
+            console.log(limit);
         } else {
             if (TelegramBot.isDefined(responseParameters.keyword)) {
                 console.log(responseParameters.keyword);
@@ -273,6 +274,7 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             }
+            console.log(limit);
         }
     }
 
