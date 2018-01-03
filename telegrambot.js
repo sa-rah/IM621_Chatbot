@@ -168,7 +168,7 @@ module.exports = class TelegramBot {
     }
 
     checkResponseParameters(req, res, responseParameters) {
-        let limit;
+        let limit = 1;
 
         if (TelegramBot.isDefined(responseParameters.amount)) {
             console.log(responseParameters.amount);
