@@ -210,13 +210,17 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
-                this._giphyService.random('gifs', {})
-                    .then((response) => {
-                        res.send({ "speech": response.data.url });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                    let count = 0;
+                    while(count < limit ) {
+                        this._giphyService.random('gifs', {})
+                            .then((response) => {
+                                res.send({"speech": response.data.url});
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                        count++;
+                    }
             }
         } else if (TelegramBot.isDefined(responseParameters.sticker)) {
             console.log(responseParameters.sticker);
@@ -238,13 +242,17 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
-                this._giphyService.random('stickers', {})
-                    .then((response) => {
-                        res.send({ "speech": response.data.url });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                    let count = 0;
+                    while(count < limit ) {
+                        this._giphyService.random('stickers', {})
+                            .then((response) => {
+                                res.send({"speech": response.data.url});
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                        count++;
+                    }
             }
         } else if (TelegramBot.isDefined(responseParameters.user)) {
 
@@ -267,13 +275,17 @@ module.exports = class TelegramBot {
                         console.log(err);
                 });
             } else {
-                this._giphyService.random('gifs', {})
-                    .then((response) => {
-                        res.send({ "speech": response.data.url });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                let count = 0;
+                while(count < limit ) {
+                    this._giphyService.random('gifs', {})
+                        .then((response) => {
+                            res.send({"speech": response.data.url});
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                    count++;
+                }
             }
         }
     }
