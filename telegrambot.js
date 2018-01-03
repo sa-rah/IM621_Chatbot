@@ -266,6 +266,10 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
+                let gifParam = responseParameters.gif;
+                if (limit === 1 && gifParam === "gifs") {
+                    limit = Math.floor(Math.random() * 10) + 1;
+                }
                 this._giphyService.search('gifs', {"q": '', "limit": limit})
                     .then((response) => {
                         if (limit === 1) {
