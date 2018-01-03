@@ -179,6 +179,8 @@ module.exports = class TelegramBot {
                 limit = Math.floor(Math.random() * 10) + 1 ;
             } else if (amount === "a"){
                 limit = 1;
+            } else {
+                limit = 1;
             }
             console.log(limit);
         }
