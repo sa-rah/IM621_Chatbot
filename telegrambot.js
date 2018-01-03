@@ -180,7 +180,38 @@ module.exports = class TelegramBot {
             } else if (amount === "a") {
                 limit = 1;
             } else {
-                limit = 1;
+                switch(amount) {
+                    case "two":
+                        limit = 2;
+                        break;
+                    case "three":
+                        limit = 3;
+                        break;
+                    case "four":
+                        limit = 4;
+                        break;
+                    case "five":
+                        limit = 5;
+                        break;
+                    case "six":
+                        limit = 6;
+                        break;
+                    case "seven":
+                        limit = 7;
+                        break;
+                    case "eight":
+                        limit = 8;
+                        break;
+                    case "nine":
+                        limit = 9;
+                        break;
+                    case "ten":
+                        limit = 10;
+                        break;
+                    default:
+                        limit = 1;
+                        break;
+                }
             }
         }
 
