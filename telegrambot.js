@@ -263,7 +263,13 @@ module.exports = class TelegramBot {
                         console.log(err);
                 });
             } else {
-                res.send(200);
+                this._giphyService.random('gifs', {})
+                    .then((response) => {
+                        res.send({ "speech": response.data.url });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
         }
     }
