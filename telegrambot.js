@@ -172,7 +172,7 @@ module.exports = class TelegramBot {
 
         if(TelegramBot.isDefined(responseParameters.amount)){
             console.log(responseParameters.amount);
-            let amount = responseParameters.amount[0];
+            let amount = responseParameters.amount;
             if(amount === "amount"){
                 limit = Math.floor(Math.random() * 10) + 1 ;
             } else if (amount === "several") {
