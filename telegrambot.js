@@ -252,7 +252,7 @@ module.exports = class TelegramBot {
                         });
                     count++;
                 }
-                res.send({"speech": gifs.toString()});
+                setTimeout(function(){res.send({"speech": gifs.toString()});}, 5000)
             }
             console.log(limit);
         } else if (TelegramBot.isDefined(responseParameters.sticker)) {
@@ -287,7 +287,7 @@ module.exports = class TelegramBot {
                         });
                     count++;
                 }
-                res.send({"speech": stickers.toString()});
+                setTimeout(function(){res.send({"speech": stickers.toString()});}, 5000)
             }
             console.log(limit);
         } else {
@@ -321,7 +321,7 @@ module.exports = class TelegramBot {
                         });
                     count++;
                 }
-                res.send({"speech": gifs.toString()});
+                setTimeout(function(){res.send({"speech": gifs.toString()});}, 5000)
             }
             console.log(limit);
         }
