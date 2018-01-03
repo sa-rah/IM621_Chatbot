@@ -168,23 +168,35 @@ module.exports = class TelegramBot {
     }
 
     checkResponseParameters(req, res, responseParameters) {
-        let limit = 1;
+        let limit;
+
+        console.log(responseParameters.amount);
+        console.log(responseParameters.number-integer);
+        console.log(responseParameters.gif);
+        console.log(responseParameters.sticker);
+        console.log(responseParameters.keyword);
+
+        if(TelegramBot.isDefined(responseParameters.amount)){
+            let amount = responseParameters.amount;
+            if(amount === "amount"){
+                limit = Math.floor(Math.random() * 10) + 1 ;
+            } else if (amount === "several") {
+                limit = Math.floor(Math.random() * 10) + 1 ;
+            } else if (amount === "a"){
+                limit = 1;
+            }
+        }
+
+        if(TelegramBot.isDefined(responseParameters.number-integer)){
+            limit = responseParameters.number-integer;
+        }
+
         if(TelegramBot.isDefined(responseParameters.gif)){
             let gifParam = responseParameters.gif;
+            if(limit === 1 && gifParam === "gifs"){
+               limit = Math.floor(Math.random() * 10) + 1 ;
+            }
             if(TelegramBot.isDefined(responseParameters.keyword)){
-                if(TelegramBot.isDefined(responseParameters.amount)){
-                    let amount = responseParameters.amount;
-                    if(amount === "amount"){
-                        limit = 5;
-                    } else if (amount === "several") {
-                        limit = 8;
-                    } else if (!isNaN(amount)) {
-                        limit = amount;
-                    } else if (gifParam === "gifs") {
-                        limit = 5;
-                    }
-                    console.log(gifParam);
-                }
                 this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
                     .then((response) => {
                         let gifs = [];
@@ -207,17 +219,8 @@ module.exports = class TelegramBot {
             }
         } else if (TelegramBot.isDefined(responseParameters.sticker)) {
             let stickerParam = responseParameters.sticker;
-            if(TelegramBot.isDefined(responseParameters.amount)){
-                let amount = responseParameters.amount;
-                if(amount === "amount"){
-                    limit = 5;
-                } else if (amount === "several") {
-                    limit = 8;
-                } else if (!isNaN(amount)) {
-                    limit = amount;
-                } else if (stickerParam === "stickers") {
-                    limit = 5;
-                }
+            if(limit === 1 && stickerParam === "stickers"){
+                limit = Math.floor(Math.random() * 10) + 1 ;
             }
             if(TelegramBot.isDefined(responseParameters.keyword)){
                 this._giphyService.search('stickers', {"q": responseParameters.keyword, "limit": limit})
@@ -258,7 +261,7 @@ module.exports = class TelegramBot {
                     })
                     .catch((err) => {
                         console.log(err);
-                    });
+                });
             } else {
                 res.send(200);
             }
