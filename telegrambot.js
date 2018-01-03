@@ -240,19 +240,13 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
-                let count = 0;
-                let gifs = [];
-                while(count < limit){
-                    this._giphyService.random('gifs', {})
-                        .then((response) => {
-                            gifs.push(response.data.url);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                    count++;
-                }
-                setTimeout(function(){res.send({"speech": gifs.toString()});}, 5000)
+                this._giphyService.random('gifs', {})
+                    .then((response) => {
+                        res.send({"speech": response.data.url});
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
             console.log(limit);
         } else if (TelegramBot.isDefined(responseParameters.sticker)) {
@@ -275,19 +269,13 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
-                let count = 0;
-                let stickers = [];
-                while(count < limit){
-                    this._giphyService.random('stickers', {})
-                        .then((response) => {
-                            stickers.push(response.data.url);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                    count++;
-                }
-                setTimeout(function(){res.send({"speech": stickers.toString()});}, 5000)
+                this._giphyService.random('stickers', {})
+                    .then((response) => {
+                        res.send({"speech": response.data.url});
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
             console.log(limit);
         } else {
@@ -309,19 +297,13 @@ module.exports = class TelegramBot {
                         console.log(err);
                     });
             } else {
-                let count = 0;
-                let gifs = [];
-                while(count < limit){
-                    this._giphyService.random('gifs', {})
-                        .then((response) => {
-                            gifs.push(response.data.url);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                    count++;
-                }
-                setTimeout(function(){res.send({"speech": gifs.toString()});}, 5000)
+                this._giphyService.random('gifs', {})
+                    .then((response) => {
+                        res.send({"speech": response.data.url});
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
             console.log(limit);
         }
