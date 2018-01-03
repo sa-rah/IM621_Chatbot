@@ -174,9 +174,9 @@ module.exports = class TelegramBot {
             console.log(responseParameters.amount);
             let amount = responseParameters.amount;
             if (amount === "amount") {
-                limit = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                limit = Math.floor(Math.random() * 10) + 1;
             } else if (amount === "several") {
-                limit = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                limit = Math.floor(Math.random() * 10) + 1;
             } else if (amount === "a") {
                 limit = 1;
             } else {
@@ -193,7 +193,7 @@ module.exports = class TelegramBot {
             console.log(responseParameters.gif);
             let gifParam = responseParameters.gif;
             if (limit === 1 && gifParam === "gifs") {
-                limit = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                limit = Math.floor(Math.random() * 10) + 1;
             }
             if (TelegramBot.isDefined(responseParameters.keyword)) {
                 console.log(responseParameters.keyword);
@@ -222,7 +222,7 @@ module.exports = class TelegramBot {
             console.log(responseParameters.sticker);
             let stickerParam = responseParameters.sticker;
             if (limit === 1 && stickerParam === "stickers") {
-                limit = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+                limit = Math.floor(Math.random() * 10) + 1;
             }
             if (TelegramBot.isDefined(responseParameters.keyword)) {
                 console.log(responseParameters.keyword);
