@@ -183,6 +183,7 @@ module.exports = class TelegramBot {
                     } else if (gifParam === "gifs") {
                         limit = 5;
                     }
+                    console.log(gifParam);
                 }
                 this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
                     .then((response) => {
