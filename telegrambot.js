@@ -180,11 +180,12 @@ module.exports = class TelegramBot {
             } else if (amount === "a"){
                 limit = 1;
             }
+            console.log(limit);
         }
 
-        if(TelegramBot.isDefined(responseParameters.number-integer)){
-            console.log(responseParameters.number-integer);
-            limit = responseParameters.number-integer;
+        if(TelegramBot.isDefined(responseParameters['number-integer'])){
+            console.log(responseParameters['number-integer']);
+            limit = responseParameters['number-integer'];
         }
 
         if(TelegramBot.isDefined(responseParameters.gif)){
