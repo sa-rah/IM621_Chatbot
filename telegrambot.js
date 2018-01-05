@@ -230,24 +230,6 @@ module.exports = class TelegramBot {
             console.log(responseParameters['number-integer']);
             limit = responseParameters['number-integer'];
         }
-
-        if (TelegramBot.isDefined(responseParameters.info)) {
-            let url;
-            if(this._id.indexOf('-') !== -1){
-                url = this._id.split("-");
-            } else {
-                url = this._id.split("/");
-            }
-
-                let id = url[url.length - 1];
-                this._giphyService.gifByID(id)
-                    .then((response) => {
-                        console.log(response);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-        } else {
             if (TelegramBot.isDefined(responseParameters.gif)) {
                 console.log(responseParameters.gif);
                 let gifParam = responseParameters.gif;
@@ -335,7 +317,6 @@ module.exports = class TelegramBot {
                 }
                 console.log(limit);
             }
-        }
     }
 
     replyText(msg) {
