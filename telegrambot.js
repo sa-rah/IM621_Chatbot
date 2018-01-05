@@ -159,7 +159,6 @@ module.exports = class TelegramBot {
         }
 
         let updateObject = req.body;
-        console.log(req.body);
 
         if (updateObject && updateObject.result.resolvedQuery) {
             let responseParameters = updateObject.result.parameters;
@@ -249,7 +248,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
-                        res.send({"speech": response.data.url});
+                        res.send({"speech": response.data.url, "contextOut": [{"name": "Getgif-followup", "parameters": [{"gif": response.data.url}]}]});
                     })
                     .catch((err) => {
                         console.log(err);
