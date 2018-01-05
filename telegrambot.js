@@ -133,6 +133,7 @@ module.exports = class TelegramBot {
                                 msg: text
                             });
                         });
+                        console.log(response.result);
                         TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
                         TelegramBot.createResponse(res, 200, 'Received empty result');
