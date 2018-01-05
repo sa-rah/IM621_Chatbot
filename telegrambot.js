@@ -126,7 +126,7 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
                     console.log(response);
-                    console.log(response.result.messages);
+                    console.log(response.result.fulfillment.messages);
                     if (TelegramBot.isDefined(response.result)) {
                         let speech = response.result.fulfillment.speech.split(",");
                         speech.forEach((text) => {
