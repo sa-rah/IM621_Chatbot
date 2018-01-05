@@ -278,6 +278,10 @@ module.exports = class TelegramBot {
                     });
             }
             console.log(limit);
+        } else if (TelegramBot.isDefined(responseParameters.info)) {
+
+            console.log(req);
+
         } else {
             if (TelegramBot.isDefined(responseParameters.keyword)) {
                 console.log(responseParameters.keyword);
