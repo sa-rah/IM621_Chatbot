@@ -221,7 +221,8 @@ module.exports = class TelegramBot {
         }
 
         if (TelegramBot.isDefined(responseParameters.info)) {
-            console.log(req.body);
+            console.log(req.body.results.contexts);
+            console.log(req.body.originalRequest);
         }
 
         if (TelegramBot.isDefined(responseParameters.gif)) {
