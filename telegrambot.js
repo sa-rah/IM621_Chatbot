@@ -232,7 +232,13 @@ module.exports = class TelegramBot {
         }
 
         if (TelegramBot.isDefined(responseParameters.info)) {
-                let url = this._id.split("-");
+            let url;
+            if(this._id.indexOf('-') !== -1){
+                url = this._id.split("-");
+            } else {
+                url = this._id.split("/");
+            }
+
                 let id = url[url.length - 1];
                 this._giphyService.gifByID(id)
                     .then((response) => {
