@@ -159,6 +159,7 @@ module.exports = class TelegramBot {
         }
 
         let updateObject = req.body;
+        console.log(req.body);
 
         if (updateObject && updateObject.result.resolvedQuery) {
             let responseParameters = updateObject.result.parameters;
