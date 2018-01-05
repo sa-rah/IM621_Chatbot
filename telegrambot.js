@@ -248,7 +248,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
-                        res.send({"speech": response.data.url, "contextOut": response.data.url});
+                        res.send({"speech": response.data.url});
                     })
                     .catch((err) => {
                         console.log(err);
@@ -277,7 +277,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('stickers', {})
                     .then((response) => {
-                        res.send({"speech": response.data.url, "contextOut": response.data.url});
+                        res.send({"speech": response.data.url});
                     })
                     .catch((err) => {
                         console.log(err);
@@ -290,7 +290,7 @@ module.exports = class TelegramBot {
                 this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
                     .then((response) => {
                         if (limit === 1) {
-                            res.send({"speech": response.data.url, "contextOut": response.data.url});
+                            res.send({"speech": response.data.url});
                         } else {
                             let gifs = [];
                             response.data.forEach((gifObject) => {
@@ -305,7 +305,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
-                        res.send({"speech": response.data.url, "contextOut": response.data.url});
+                        res.send({"speech": response.data.url});
                     })
                     .catch((err) => {
                         console.log(err);
