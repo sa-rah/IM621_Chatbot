@@ -47,6 +47,14 @@ module.exports = class TelegramBot {
         this._sessionIds = value;
     }
 
+    get id() {
+        return this._id();
+    }
+
+    set id(value) {
+        this._id = value;
+    }
+
     constructor(botConfig, baseUrl) {
         this._botConfig = botConfig;
         var apiaiOptions = {
@@ -63,6 +71,7 @@ module.exports = class TelegramBot {
         console.log('Starting bot on ' + this._webhookUrl);
 
         this._telegramApiUrl = 'https://api.telegram.org/bot' + botConfig.telegramToken;
+        this._id = '';
     }
 
     start(responseCallback, errCallback) {
@@ -134,6 +143,7 @@ module.exports = class TelegramBot {
                             });
                         });
                         console.log(response.result);
+                        this._id = speech;
                         TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
                         TelegramBot.createResponse(res, 200, 'Received empty result');
@@ -222,96 +232,103 @@ module.exports = class TelegramBot {
         }
 
         if (TelegramBot.isDefined(responseParameters.info)) {
-            console.log(req.body.result.contexts);
-            console.log(req.body);
-        }
-
-        if (TelegramBot.isDefined(responseParameters.gif)) {
-            console.log(responseParameters.gif);
-            let gifParam = responseParameters.gif;
-            if (limit === 1 && gifParam === "gifs") {
-                limit = Math.floor(Math.random() * 10) + 1;
-            }
-            if (TelegramBot.isDefined(responseParameters.keyword)) {
-                console.log(responseParameters.keyword);
-                this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
+                let url = this._id.split("-");
+                let id = url[url.length - 1];
+                this._giphyService.gifByID(id)
                     .then((response) => {
-                        let gifs = [];
-                        response.data.forEach((gifObject) => {
-                            gifs.push(gifObject.url);
-                        });
-                        res.send({"speech": gifs.toString()});
+                        console.log(response);
                     })
                     .catch((err) => {
                         console.log(err);
                     });
-            } else {
-                this._giphyService.random('gifs', {})
-                    .then((response) => {
-                        res.send({"speech": response.data.url});
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-            console.log(limit);
-        } else if (TelegramBot.isDefined(responseParameters.sticker)) {
-            console.log(responseParameters.sticker);
-            let stickerParam = responseParameters.sticker;
-            if (limit === 1 && stickerParam === "stickers") {
-                limit = Math.floor(Math.random() * 10) + 1;
-            }
-            if (TelegramBot.isDefined(responseParameters.keyword)) {
-                console.log(responseParameters.keyword);
-                this._giphyService.search('stickers', {"q": responseParameters.keyword, "limit": limit})
-                    .then((response) => {
-                        let sticker = [];
-                        response.data.forEach((stickerObject) => {
-                            sticker.push(stickerObject.url);
-                        });
-                        res.send({"speech": sticker.toString()});
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            } else {
-                this._giphyService.random('stickers', {})
-                    .then((response) => {
-                        res.send({"speech": response.data.url});
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-            console.log(limit);
         } else {
-            if (TelegramBot.isDefined(responseParameters.keyword)) {
-                console.log(responseParameters.keyword);
-                this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
-                    .then((response) => {
-                        if (limit === 1) {
-                            res.send({"speech": response.data.url});
-                        } else {
+            if (TelegramBot.isDefined(responseParameters.gif)) {
+                console.log(responseParameters.gif);
+                let gifParam = responseParameters.gif;
+                if (limit === 1 && gifParam === "gifs") {
+                    limit = Math.floor(Math.random() * 10) + 1;
+                }
+                if (TelegramBot.isDefined(responseParameters.keyword)) {
+                    console.log(responseParameters.keyword);
+                    this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
+                        .then((response) => {
                             let gifs = [];
                             response.data.forEach((gifObject) => {
                                 gifs.push(gifObject.url);
                             });
                             res.send({"speech": gifs.toString()});
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                } else {
+                    this._giphyService.random('gifs', {})
+                        .then((response) => {
+                            res.send({"speech": response.data.url});
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                console.log(limit);
+            } else if (TelegramBot.isDefined(responseParameters.sticker)) {
+                console.log(responseParameters.sticker);
+                let stickerParam = responseParameters.sticker;
+                if (limit === 1 && stickerParam === "stickers") {
+                    limit = Math.floor(Math.random() * 10) + 1;
+                }
+                if (TelegramBot.isDefined(responseParameters.keyword)) {
+                    console.log(responseParameters.keyword);
+                    this._giphyService.search('stickers', {"q": responseParameters.keyword, "limit": limit})
+                        .then((response) => {
+                            let sticker = [];
+                            response.data.forEach((stickerObject) => {
+                                sticker.push(stickerObject.url);
+                            });
+                            res.send({"speech": sticker.toString()});
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                } else {
+                    this._giphyService.random('stickers', {})
+                        .then((response) => {
+                            res.send({"speech": response.data.url});
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                console.log(limit);
             } else {
-                this._giphyService.random('gifs', {})
-                    .then((response) => {
-                        res.send({"speech": response.data.url});
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                if (TelegramBot.isDefined(responseParameters.keyword)) {
+                    console.log(responseParameters.keyword);
+                    this._giphyService.search('gifs', {"q": responseParameters.keyword, "limit": limit})
+                        .then((response) => {
+                            if (limit === 1) {
+                                res.send({"speech": response.data.url});
+                            } else {
+                                let gifs = [];
+                                response.data.forEach((gifObject) => {
+                                    gifs.push(gifObject.url);
+                                });
+                                res.send({"speech": gifs.toString()});
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                } else {
+                    this._giphyService.random('gifs', {})
+                        .then((response) => {
+                            res.send({"speech": response.data.url});
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                console.log(limit);
             }
-            console.log(limit);
         }
     }
 
