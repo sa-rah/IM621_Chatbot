@@ -220,6 +220,10 @@ module.exports = class TelegramBot {
             limit = responseParameters['number-integer'];
         }
 
+        if (TelegramBot.isDefined(responseParameters.info)) {
+            console.log(req.body);
+        }
+
         if (TelegramBot.isDefined(responseParameters.gif)) {
             console.log(responseParameters.gif);
             let gifParam = responseParameters.gif;
@@ -278,10 +282,6 @@ module.exports = class TelegramBot {
                     });
             }
             console.log(limit);
-        } else if (TelegramBot.isDefined(responseParameters.info)) {
-
-            console.log(req);
-
         } else {
             if (TelegramBot.isDefined(responseParameters.keyword)) {
                 console.log(responseParameters.keyword);
