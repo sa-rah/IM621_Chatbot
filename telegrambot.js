@@ -248,7 +248,7 @@ module.exports = class TelegramBot {
             } else {
                 this._giphyService.random('gifs', {})
                     .then((response) => {
-                        res.send({"speech": response.data.url, "contextOut": [{"name": "Getgif-followup", "parameters": [{"gif": response.data.url}]}]});
+                        res.json({"speech": response.data.url, "contextOut": [{"name": "Getgif-followup", "parameters": [{"gif": response.data.url}]}]});
                     })
                     .catch((err) => {
                         console.log(err);
