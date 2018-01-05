@@ -125,6 +125,7 @@ module.exports = class TelegramBot {
                     });
 
                 apiaiRequest.on('response', (response) => {
+                    console.log(response.result);
                     if (TelegramBot.isDefined(response.result)) {
                         let speech = response.result.fulfillment.speech.split(",");
                         speech.forEach((text) => {
@@ -133,7 +134,6 @@ module.exports = class TelegramBot {
                                 msg: text
                             });
                         });
-                        console.log(response.result);
                         TelegramBot.createResponse(res, 200, 'Reply sent');
                     } else {
                         TelegramBot.createResponse(res, 200, 'Received empty result');
